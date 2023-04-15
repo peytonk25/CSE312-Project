@@ -10,4 +10,4 @@ def handle_ping():
     emit('pong', {'data': 'Pong!'})
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, port=8001)

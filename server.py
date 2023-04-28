@@ -9,5 +9,9 @@ socketio = SocketIO(app)
 def handle_ping():
     emit('pong', {'data': 'Pong!'})
 
+@app.route('/')
+def start():
+    return render_template('index.html')
+
 if __name__ == '__main__':
     socketio.run(app, port=8001)

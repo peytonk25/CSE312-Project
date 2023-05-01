@@ -1,0 +1,8 @@
+{% if current_user.is_authenticated %}
+  <h1>Welcome, {{ current_user.display_name }}!</h1>
+  <p>Number of Wins: {{ current_user.wins }}</p>
+  <img src="{{ url_for('static', filename='avatars/' + current_user.avatar) }}" alt="Avatar" width="100">
+{% else %}
+  <h1>Welcome to Rock-Paper-Scissors!</h1>
+  <p>Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a> to play.</p>
+{% endif %}

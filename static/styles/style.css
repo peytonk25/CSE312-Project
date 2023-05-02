@@ -34,3 +34,37 @@ html {
     font-size: 1rem;
     padding:10px;
 }
+
+
+a.matchLink {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+a.matchLink:hover {
+    color: aqua;
+}
+
+#optionRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.battleOption {
+    width: 250px;
+    height: 250px;
+    border: solid black 7px;
+    margin: 10px;
+    background-color: lightblue;
+}
+
+.vs {
+    font-size: 70px;
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

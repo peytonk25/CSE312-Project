@@ -14,6 +14,10 @@ def handle_ping():
 def start():
     return render_template('index.html')
 
+@app.route('/match')
+def match():
+    return render_template('match.html')
+
 
 if __name__ == '__main__':
     socketio.run(app, port=8001)

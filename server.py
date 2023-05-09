@@ -87,6 +87,10 @@ def register():
     
     return render_template('register.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 @app.route('/match')
 def match():
     return render_template('match.html')

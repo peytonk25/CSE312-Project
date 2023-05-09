@@ -1,5 +1,6 @@
 html {
     background-color: grey;
+    border: solid black 5px;
 }
 
 
@@ -57,12 +58,19 @@ a.matchLink:hover {
     justify-content: center;
 }
 
+#optionRow2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .battleOption {
     width: 250px;
     height: 250px;
     border: solid black 7px;
     margin: 10px;
     background-color: lightblue;
+    padding: 10px;
 }
 
 .vs {

@@ -5,21 +5,39 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
     <title>Byte Bandits' RPS Battle Royale</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8" src="static/javascript/scripts.js"></script>
+</script>
 </head>
-<h1 style="text-align: center;"> Match in Progress:</h1>
+<h1 style="text-align: center;">Match In Progress</h1>
+<button onclick="createRoom()">Click me to create a lobby</button>
+<br>
+
+
+<form name="joinForm" onsubmit="joinRoom(); return false">
+    <label for="idBox">Or search for a room here</label><br>
+    <input type="text" id="idBox" name="idBox">
+    <input type="submit" value="Submit">
+</form>
+
+
+
 <body>
+    <h1 style="text-align: center; font-size: 50px;" id="player1Name"></h1>
     <div id="optionRow">
-        <img class="battleOption" src="static/images/rock.png"> <!---Onlick function so the images have functionality and animation-->
-        <img class="battleOption" src="static/images/paper.png">
-        <img class="battleOption" src="static/images/scissors.png">
+        <img class="battleOption" src="static/images/rock.png" onclick="rock1()"> <!---Onlick function so the images have functionality and animation-->
+        <img class="battleOption" src="static/images/paper.png" onclick="paper1()">
+        <img class="battleOption" src="static/images/scissors.png" onclick="scissors1()">
     </div>
     <br>
-    <div class="vs"> --- VS. ---</div>
+    <div id="middleMatchText" class="vs"> --- VS. ---</div>
     <br>
-    <div id="optionRow">
-        <img class="battleOption" src="static/images/rock.png"> <!---Onlick function so the images have functionality and animation-->
-        <img class="battleOption" src="static/images/paper.png">
-        <img class="battleOption" src="static/images/scissors.png">
+
+    <h1 style="text-align: center; font-size: 50px;" id="player1Name"></h1>
+    <div id="optionRow2">
+        <img class="battleOption" src="static/images/rock.png" onclick="rock2()"> <!---Onlick function so the images have functionality and animation -->
+        <img class="battleOption" src="static/images/paper.png" onclick="paper2()">
+        <img class="battleOption" src="static/images/scissors.png" onclick="scissors2()">
     </div>
 </body>
 </html>

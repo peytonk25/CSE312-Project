@@ -5,21 +5,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}"> 
     <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
     <title>Byte Bandits' RPS Battle Royale</title>
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-        // sending a connect request to the server.
-        var socket = io.connect('http://localhost:5000');
-        socket.emit('after connect', function(connectMsg) {
-        $('#log').append('<br>' + $('<div/>').text('What is the intention of the code: ' + connectMsg.data).html());
-        });
-        });
-        </script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8" src="static/javascript/scripts.js"></script>
 </head>
 <h1>
-    <div class="title-banner"s>
+    <div class="title-banner">
         <div class="leftBannerText">
         Byte Bandits
         </div>
@@ -35,4 +25,5 @@
     <div id="log"></div>
     <a href="/match" class="matchLink">Match frontend preview (work in progress)</a>
     </body>
-    </html>
+
+</html>

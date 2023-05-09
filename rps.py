@@ -6,18 +6,25 @@
 
 def rps(player1, player2):
     if player1 == player2:
+        print("It's a tie")
         return 3 # Tie, run again
     elif player1 == "rock" and player2 == "scissors":
+        print("Player 1 Wins")
         return 1 # Player 1 wins
     elif player1 == "scissors" and player2 == "paper":
+        print("Player 1 Wins")
         return 1 # Player 1 wins
     elif player1 == "paper" and player2 == "rock":
+        print("Player 1 Wins")
         return 1 # Player 1 wins
-    elif player1 == "rock" and player2 == "scissors":
+    elif player2 == "rock" and player1 == "scissors":
+        print("Player 2 Wins")
         return 2
-    elif player1 == "scissors" and player2 == "paper":
+    elif player2 == "scissors" and player1 == "paper":
+        print("Player 2 Wins")
         return 2
-    elif player1 == "paper" and player2 == "rock":
+    elif player2 == "paper" and player1 == "rock":
+        print("Player 2 Wins")
         return 2
     else: 
         print("Error: Incompatible inputs received")

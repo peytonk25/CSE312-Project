@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 var socket = io();
 
@@ -81,3 +82,5 @@ function paper2() {
 function scissors2() {
     socket.emit('battle2', {data: "scissors"});
 }
+=======
+>>>>>>> dev

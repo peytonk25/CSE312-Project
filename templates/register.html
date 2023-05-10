@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
-    <title>Login!</title>
+    <title>Register!</title>
 </head>
 <script type="text/javascript" src="../static/javascript/loginScript.js"></script>
 
-<div class="login_title">Login!</div>
+<div class="login_title">Register!</div>
 <br/>
 <br/>
 <div class="formHolder">
@@ -16,10 +16,12 @@
     <br/>
     <input id="password" class="input_box" type="password" placeholder="Password"/>
     <br />
-    <input type="submit" onclick="sendLogin()"/>
+    <input id="display" class="input_box" type="text" placeholder="Display Name!"/>
+    <br />
+    <input type="submit" onclick="sendRegister()"/>
 </form>
 <br/>
-<a class="register_link" href="{{url_for('register')}}">New? Sign Up Here!</a>
+<a class="register_link" href="{{url_for('login')}}" >Login</a>
 </div>
 
 

@@ -7,25 +7,44 @@
 </head>
 <script type="text/javascript" src="../static/javascript/loginScript.js"></script>
 
-<div class="login_title">Register!</div>
+<div class="container">
+  <div class="container behind-screen">
+    <div class="container screen">
+      <p>Register!</p>
+    </div>
+  </div>
+</div>
 <br/>
 <br/>
+<div class="avatar-container">
+    <div style="color:whitesmoke; font-size: 1.2rem"> Select an Avatar </div>
+    <br/>
+    <div class="individual-avatar a2"> <div class="atext">Rock</div> </div>
+    <div class="individual-avatar a1"> <div class="atext">Paper</div> </div>
+    <div class="individual-avatar a3"> <div class="atext">Scissors</div> </div>
+</div>
+<br/>
+<br/>
+
 <div class="formHolder">
 <form>
     <input id="username" class="input_box" type="text" placeholder="Username"/>
     <br/>
+    <input id="display" class="input_box" type="text" placeholder="Display Name"/>
+    <br/>
     <input id="password" class="input_box" type="password" placeholder="Password"/>
-    <br />
-    <input type="password" id="c_pass" placeholder="Confirm New Password"/>
-    <br />
-    <input id="display" class="input_box" type="text" placeholder="Display Name!"/>
-    <br />
+    <br/>
+    <input type="password" class="confirm_pass" placeholder="Confirm Password"/>
+    <br/>
     <div>{{ error }}</div>
-    <br />
-    <input type="submit" onclick="sendRegister()"/>
+    <input type="submit" class="submit" onclick="sendRegister()"/>
 </form>
 <br/>
-<a class="register_link" href="{{url_for('login')}}" >Login</a>
+<div style="color:whitesmoke; font-size: 1.2rem"> Already have an account? <br/>
+    <a class="register_link" href="{{url_for('login')}}">Login!</a>
+</div>
+    <br/>
+
 </div>
 
 

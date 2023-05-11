@@ -1,17 +1,6 @@
-<<<<<<< HEAD
 
 var socket = io();
 
-
-function wipe() {
-    var battleSpace = document.getElementById('battleground');
-    battleSpace.style.display = "none"
-}
-
-function remake() {
-    var battleSpace = document.getElementById('battleground');
-    battleSpace.style.display = "block"
-}
 
 socket.on('connect', function() {
     socket.emit('connectionEstablished', {data: 'I\'m connected!'});
@@ -75,7 +64,6 @@ function joinRoom() {
 
 
 
-
 function rock1() {
     socket.emit('battle', {data: "rock", user: "User"});
 }
@@ -97,18 +85,8 @@ function paper2() {
 }
 
 function scissors2() {
-<<<<<<< HEAD
     socket.emit('battle2', {data: "scissors", user: "User2"});
 }
 
 
 
-function checkLobbies() {
-    socket.emit('checkLobbies')
-}
-=======
-    socket.emit('battle2', {data: "scissors"});
-}
-=======
->>>>>>> dev
->>>>>>> refs/remotes/origin/main

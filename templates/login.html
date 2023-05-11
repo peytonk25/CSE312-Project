@@ -7,22 +7,28 @@
 </head>
 <script type="text/javascript" src="../static/javascript/loginScript.js"></script>
 
-<div class="login_title">Login!</div>
-<br/>
+<div class="container">
+  <div class="container behind-screen">
+    <div class="container screen">
+      <p>Login!</p>
+    </div>
+  </div>
+</div>
+
 <br/>
 <div class="formHolder">
 <form>
     <input id="username" class="input_box" type="text" placeholder="Username"/>
     <br/>
     <input id="password" class="input_box" type="password" placeholder="Password"/>
-    <br />
+    <br/>
     <div>{{ error }}</div>
-    <br />
-    <input type="submit" onclick="sendLogin()"/>
+    <input type="submit" class="submit" onclick="sendLogin()"/>
 </form>
 <br/>
-<a class="register_link" href="{{url_for('register')}}">New? Sign Up Here!</a>
+<div style="color:whitesmoke; font-size: 1.2rem"> New here? <br/>
+    <a class="register_link" href="{{url_for('register')}}">Register!</a>
 </div>
-
+</div>
 
 </html>

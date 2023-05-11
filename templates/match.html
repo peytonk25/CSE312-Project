@@ -9,7 +9,7 @@
     <script type="text/javascript" charset="utf-8" src="static/javascript/scripts.js"></script>
 </script>
 </head>
-<h1 style="text-align: center;">Match In Progress</h1>
+<h1 id="matchHeader" style="text-align: center;">Lobby Menu</h1>
 <button onclick="createRoom()">Click me to create a lobby</button>
 <br>
 
@@ -20,9 +20,14 @@
     <input type="submit" value="Submit">
 </form>
 
+<button onclick="checkLobbies()">Lobby Check</button>
+<button onclick="wipe()">Wipe</button>
+<button onclick="remake()">Remake</button>
+
 
 
 <body>
+    <div id="battleground">
     <h1 style="text-align: center; font-size: 50px;" id="player1Name"></h1>
     <div id="optionRow">
         <img class="battleOption" src="static/images/rock.png" onclick="rock1()"> <!---Onlick function so the images have functionality and animation-->
@@ -33,11 +38,12 @@
     <div id="middleMatchText" class="vs"> --- VS. ---</div>
     <br>
 
-    <h1 style="text-align: center; font-size: 50px;" id="player1Name"></h1>
+    <h1 style="text-align: center; font-size: 50px;" id="player2Name"></h1>
     <div id="optionRow2">
         <img class="battleOption" src="static/images/rock.png" onclick="rock2()"> <!---Onlick function so the images have functionality and animation -->
         <img class="battleOption" src="static/images/paper.png" onclick="paper2()">
         <img class="battleOption" src="static/images/scissors.png" onclick="scissors2()">
+    </div>
     </div>
 </body>
 </html>

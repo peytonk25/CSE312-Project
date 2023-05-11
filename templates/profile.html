@@ -8,26 +8,23 @@
 
 <script type="text/javascript" src="../static/javascript/loginScript.js"></script>
 
+<div class="formHolder">
+<img src="{{avatar}}" alt="your current avatar"/>
 <div>Display Name: {{display}}</div>
 <div>Username: {{username}}</div>
 <br />
-<div>Change Info?</div>
+<div style="color:whitesmoke; padding: 10px; font-size: 1rem;">Need a Change?</div>
 <form >
-<input type="text" id="display" placeholder="New Display Name"/>
+<input type="text" id="display" class="input_box" placeholder="New Display Name"/>
 <br />
-<input type="password" id="password" placeholder="New Password"/>
+<input type="password" id="password" class="input_box" placeholder="New Password"/>
 <br />
-<input type="password" id="c_pass" placeholder="Confirm New Password"/>
-<br />
-
-<input type="submit" onclick="edit()"/>
-<br />
+<input type="password" class="confirm_pass" placeholder="Confirm New Password"/>
+<div>{{ error }}</div>
+<input type="submit" class="submit" onclick="edit()"/>
 </form>
-<div>{{error}}</div>
-<a class="register_link" href="{{url_for('index')}}" >Home</a>
-<br />
-<br />
 <a class="register_link" href="{{url_for('logout')}}" >Logout</a>
+</div>
 
 
 </html>

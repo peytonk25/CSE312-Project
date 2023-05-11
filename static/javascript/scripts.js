@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 var socket = io();
 
@@ -96,6 +97,7 @@ function paper2() {
 }
 
 function scissors2() {
+<<<<<<< HEAD
     socket.emit('battle2', {data: "scissors", user: "User2"});
 }
 
@@ -104,3 +106,9 @@ function scissors2() {
 function checkLobbies() {
     socket.emit('checkLobbies')
 }
+=======
+    socket.emit('battle2', {data: "scissors"});
+}
+=======
+>>>>>>> dev
+>>>>>>> refs/remotes/origin/main

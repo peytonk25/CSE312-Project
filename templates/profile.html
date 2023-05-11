@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+    <title>Profile</title>
+</head>
+
+<script type="text/javascript" src="../static/javascript/loginScript.js"></script>
+
+<div>Display Name: {{display}}</div>
+<div>Username: {{username}}</div>
+<br />
+<div>Change Info?</div>
+<form >
+<input type="text" id="display" placeholder="New Display Name"/>
+<br />
+<input type="password" id="password" placeholder="New Password"/>
+<br />
+<input type="password" id="c_pass" placeholder="Confirm New Password"/>
+<br />
+<div>{{ error }}</div>
+<br />
+<input type="submit" onclick="edit()"/>
+</form>
+
+
+</html>

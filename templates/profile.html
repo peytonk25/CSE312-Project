@@ -19,10 +19,15 @@
 <br />
 <input type="password" id="c_pass" placeholder="Confirm New Password"/>
 <br />
-<div>{{ error }}</div>
-<br />
+
 <input type="submit" onclick="edit()"/>
+<br />
 </form>
+<div>{{error}}</div>
+<a class="register_link" href="{{url_for('index')}}" >Home</a>
+<br />
+<br />
+<a class="register_link" href="{{url_for('logout')}}" >Logout</a>
 
 
 </html>

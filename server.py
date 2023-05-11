@@ -18,6 +18,7 @@ from flask_socketio import SocketIO, emit
 import database
 import rps
 import bcrypt
+import time
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -121,83 +122,83 @@ def index():
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    data = request.form.to_dict()
-    if request.method == "POST" and 'redirect' in data:
-        if data['redirect'] == 'true':
-            return redirect(url_for('register'))
-    elif request.method == "POST" and 'username' in data and 'password' in data:
-        username = data['username']
-        username = username.replace("&", '&amp;')
-        username = username.replace("<", '&lt;')
-        username = username.replace(">", '&gt;')
-        password = data['password']
-        password = password.replace("&", '&amp;')
-        password = password.replace("<", '&lt;')
-        password = password.replace(">", '&gt;')
-        check = False
-        for i in database.users_coll.find({'username': str(username)}):
-            check = True
-        if check:
-            for i in database.users_coll.find({'username': str(username)}):
-                hash = bcrypt.hashpw(str(password).encode('utf-8'), i['salt'])
-                if hash == i['password']:
-                    #Logged In
-                    session['username'] = username
-                    return redirect(url_for('index'))
-                else:
-                    return render_template('login.html', error="Incorrect Login")
-        else:
-            return render_template('login.html', error="Incorrect Login")
+    if 'username' in session:
+        return redirect(url_for('index'))
     else:
-        return render_template('login.html', error="")
-
-@app.route('/register', methods=["GET", "POST"])
-def register():
-    data = request.form.to_dict()
-    if request.method == "POST" and 'redirect' in data:
-        if data['redirect'] == 'true':
-            return redirect(url_for('login'))
-    elif request.method == "POST" and 'username' in data and 'password' in data and 'display' in data and 'c_pass' in data:
-        print(data)
-        username = data['username']
-        username = username.replace("&", '&amp;')
-        username = username.replace("<", '&lt;')
-        username = username.replace(">", '&gt;')
-        check = False
-        for i in database.users_coll.find({'username': str(username)}):
-            check = True
-        if check:
-            return render_template('register.html', error="Username Already In Use")
-        else:
+        data = request.form.to_dict()
+        if request.method == "POST" and 'username' in data and 'password' in data:
+            username = data['username']
+            username = username.replace("&", '&amp;')
+            username = username.replace("<", '&lt;')
+            username = username.replace(">", '&gt;')
             password = data['password']
-            c_pass = data['c_pass']
             password = password.replace("&", '&amp;')
             password = password.replace("<", '&lt;')
             password = password.replace(">", '&gt;')
-            c_pass = c_pass.replace("&", '&amp;')
-            c_pass = c_pass.replace("<", '&lt;')
-            c_pass = c_pass.replace(">", '&gt;')
-            print(password, c_pass)
-            if c_pass != password:
-                return render_template('register.html', error="Invalid Password")
+            check = False
+            for i in database.users_coll.find({'username': str(username)}):
+                check = True
+            if check:
+                for i in database.users_coll.find({'username': str(username)}):
+                    hash = bcrypt.hashpw(str(password).encode('utf-8'), i['salt'])
+                    if hash == i['password']:
+                        #Logged In
+                        session['username'] = username
+                        return redirect(url_for('profile'), code=302)
+                    else:
+                        return render_template('login.html')
             else:
-                display = data['display']
-                display = display.replace("&", '&amp;')
-                display = display.replace("<", '&lt;')
-                display = display.replace(">", '&gt;')
-                salt = bcrypt.gensalt()
-                hash = bcrypt.hashpw(bytes(password, 'utf-8'), salt)
-                letters = string.ascii_letters
-                token = ''.join(random.choice(letters) for i in range(10))
-                token_hash = bcrypt.hashpw(bytes(token, 'utf-8'), salt)
-                database.users_coll.insert_one({'display': display, 'username': username, 'password': hash, 'salt': salt, 'auth': token_hash})
-                session['username'] = username
-                return redirect(url_for('index'))
+                return render_template('login.html')
+        else:
+            return render_template('login.html', error="")
 
-    return render_template('register.html', error="")
+@app.route('/register', methods=["GET", "POST"])
+def register():
+    if 'username' in session:
+        return redirect(url_for('index'))
+    else:
+        data = request.form.to_dict()
+        if request.method == "POST" and 'username' in data and 'password' in data and 'display' in data and 'c_pass' in data:
+            
+            username = data['username']
+            username = username.replace("&", '&amp;')
+            username = username.replace("<", '&lt;')
+            username = username.replace(">", '&gt;')
+            check = False
+            for i in database.users_coll.find({'username': str(username)}):
+                check = True
+            if check:
+                return render_template('register.html', error="Username Already In Use")
+            else:
+                password = data['password']
+                c_pass = data['c_pass']
+                password = password.replace("&", '&amp;')
+                password = password.replace("<", '&lt;')
+                password = password.replace(">", '&gt;')
+                c_pass = c_pass.replace("&", '&amp;')
+                c_pass = c_pass.replace("<", '&lt;')
+                c_pass = c_pass.replace(">", '&gt;')
+                if c_pass != password:
+                    return render_template('register.html', error="Invalid Password")
+                else:
+                    display = data['display']
+                    display = display.replace("&", '&amp;')
+                    display = display.replace("<", '&lt;')
+                    display = display.replace(">", '&gt;')
+                    salt = bcrypt.gensalt()
+                    hash = bcrypt.hashpw(bytes(password, 'utf-8'), salt)
+                    letters = string.ascii_letters
+                    token = ''.join(random.choice(letters) for i in range(10))
+                    token_hash = bcrypt.hashpw(bytes(token, 'utf-8'), salt)
+                    database.users_coll.insert_one({'display': display, 'username': username, 'password': hash, 'salt': salt, 'auth': token_hash})
+                    session['username'] = username
+                    return redirect(url_for('index'))
+
+        return render_template('register.html', error="")
 
 @app.route('/profile', methods=["GET", "POST"])
 def profile():
+    error = ""
     if 'username' not in session:
         return redirect(url_for('login'))
     else:
@@ -205,7 +206,6 @@ def profile():
             username = i['username']
             display = i['display']
         data = request.form.to_dict()
-        print(data)
         if request.method == "POST":
             if 'password' in data:
                 if 'c_pass' in data:
@@ -216,16 +216,18 @@ def profile():
                         for i in database.users_coll.find({'username': str(username)}):
                             database.users_coll.update_one({"_id": i['_id']},{"$set":{"password": new_hash}})
                     else:
-                        return render_template('profile.html', username=username, display=display, error="Passwords Do Not Match")
+                        error = 'Passwords Do Not Match'
+                        return render_template('profile.html', username=username, display=display, error=error)
                 else:
-                    return render_template('profile.html', username=username, display=display, error="Please Confirm New Password")
+                    error = 'Please Confirm New Password'
+                    return render_template('profile.html', username=username, display=display, error=error)
             if 'display' in data:
                 new_display = data['display']
                 for i in database.users_coll.find({'username': str(username)}):
                     database.users_coll.update_one({"_id": i['_id']},{"$set":{"display": str(new_display)}})
 
-            
-        return render_template('profile.html', username=username, display=display, error="")
+        error = ""
+        return render_template('profile.html', username=username, display=display, error=error)
 
 @app.route('/match')
 def match():
@@ -233,6 +235,14 @@ def match():
         return redirect(url_for('login'))
     else:
         return render_template('match.html')
+
+@app.route('/logout')
+def logout():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    else:
+        session.pop('username')
+        return redirect(url_for('login'))
 
 
 if __name__ == '__main__':

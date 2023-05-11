@@ -22,6 +22,8 @@ function sendLogin() {
     const request = new XMLHttpRequest();
     request.open("POST", "/login");
     request.send(data);
+
+    
 }
 
 function edit() {

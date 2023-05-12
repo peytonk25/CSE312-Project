@@ -18,16 +18,18 @@
     <label for="idBox">Or search for a room here</label><br>
     <input type="text" id="idBox" name="idBox">
     <input type="submit" value="Submit">
-</form>
+</form> <br>
+
+<button onclick="leaveRoom()">Leave Lobby</button>
 
 
 <body>
     <div id="battleground">
     <h1 style="text-align: center; font-size: 50px;" id="player1Name"></h1>
     <div id="optionRow">
-        <img class="battleOption" src="static/images/rock.png" onclick="rock1()"> <!---Onlick function so the images have functionality and animation-->
-        <img class="battleOption" src="static/images/paper.png" onclick="paper1()">
-        <img class="battleOption" src="static/images/scissors.png" onclick="scissors1()">
+        <img class="battleOption" src="static/images/rock.png" onclick="rock()"> <!---Onlick function so the images have functionality and animation-->
+        <img class="battleOption" src="static/images/paper.png" onclick="paper()">
+        <img class="battleOption" src="static/images/scissors.png" onclick="scissors()">
     </div>
     <br>
     <div id="middleMatchText" class="vs"> --- VS. ---</div>
@@ -35,9 +37,9 @@
 
     <h1 style="text-align: center; font-size: 50px;" id="player2Name"></h1>
     <div id="optionRow2">
-        <img class="battleOption" src="static/images/rock.png" onclick="rock2()"> <!---Onlick function so the images have functionality and animation -->
-        <img class="battleOption" src="static/images/paper.png" onclick="paper2()">
-        <img class="battleOption" src="static/images/scissors.png" onclick="scissors2()">
+        <img class="battleOption" src="static/images/qMark.png"> <!---Onlick function so the images have functionality and animation -->
+        <img class="battleOption" src="static/images/qMark.png">
+        <img class="battleOption" src="static/images/qMark.png">
     </div>
     </div>
 </body>

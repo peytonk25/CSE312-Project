@@ -1,15 +1,6 @@
 from ntpath import join
 from flask_socketio import *
 from random import *
-
-class playerChoices: 
-    player1 = ""
-    player2 = ""
-    roomID = 0
-
-newGame = playerChoices
-rooms = {} # Dictionary format is: { roomID: [list of users in the room] }
-
 import random
 import string
 from urllib import request
@@ -19,6 +10,17 @@ import database
 import rps
 import bcrypt
 import time
+
+class playerChoices: 
+    player1 = ""
+    player2 = ""
+    roomID = 0
+
+newGame = playerChoices
+rooms = {} # Dictionary format is: { roomID: [list of users in the room] }
+clientList = {} # Format is { roomID: [list of SIDs tied to users] }
+
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -37,10 +39,12 @@ def handle_ping(data):
 @socketio.on('createRoom')
 def makeLobby(data):
     roomID = data['roomID']
-    username = data['data']
+    username = data['user']
     room = roomID
     join_room(room)
-    rooms[roomID] = ['User']
+    rooms[roomID] = [username]
+    clientList[roomID] = [request.sid]
+    print(clientList)
     print("User has joined room "+ str(room))
 
 
@@ -48,37 +52,65 @@ def makeLobby(data):
 def joinLobby(data):
     roomID = int(data['roomID'])
     user = data['user']
-    print(roomID)
     if int(roomID) in rooms:
-        print("ID MATCHES")
-        print(rooms)
-        join_room(roomID)
-        rooms[roomID].append("User2")
-        print("User2 has joined room " + str(roomID))
-    print("Nothing")
+        if len(rooms[roomID]) < 2:
+            join_room(roomID)
+            rooms[roomID].append(user)
+            clientList[roomID].append(request.sid)
+            print("User2 has joined room " + str(roomID))
+            emit('joinSuccess', {"user": user, "room": roomID})
+        elif len(rooms[roomID]) == 2:
+            print("Room is full.")
+
+@socketio.on("leaveRoom")
+def leaveLobby(data):
+    room = int(data['roomID'].strip())
+    print("user has left room " + str(room))
+    leave_room(room)
+    rooms[room].remove(data['user'])
+    emit('initialize', {"top": rooms[room][0], "bottom": "", "roomID": room}, room=room)
+
 
 
 @socketio.on('battle')
 def handle_battle1(data):
     username = data['user']
-    newGame.player1 = data['data']
-    print(newGame.player1)
-    print(newGame.player2)
+    room = int(data['roomID'].strip())
+   # newGame.player1 = data['data']
+    currentRoom = rooms[room]
+    if username == currentRoom[0]:
+        newGame.player1 = data['data']
+    elif username == currentRoom[1]:
+        newGame.player2 = data['data']
     if newGame.player1 and newGame.player2:
         result = rps.rps(newGame.player1, newGame.player2)
-        for room in rooms:
-            for user in rooms[room]:
-                if user == username:
-                    roomID = room
-        print(room)
         if result == 1:
-            emit('p1win', {"player1": newGame.player1, "player2": newGame.player2}, room=roomID)
+            emit('p1win', {"player1": newGame.player1, "player2": newGame.player2, "users": currentRoom, "roomID": room}, room=clientList[room][0])
+            emit('p1win', {"player1": newGame.player2, "player2": newGame.player1, "users": currentRoom, "roomID": room}, room=clientList[room][1])
         elif result == 2:
-            emit('p2win', {"player1": newGame.player1, "player2": newGame.player2}, room=roomID)
+            emit('p2win', {"player1": newGame.player1, "player2": newGame.player2, "users": currentRoom, "roomID": room}, room=clientList[room][0])
+            emit('p2win', {"player1": newGame.player2, "player2": newGame.player1, "users": currentRoom, "roomID": room}, room=clientList[room][1])
         else:
-            emit('tie', {"player1": newGame.player1, "player2": newGame.player2}, room=roomID)
+            emit('p1win', {"player1": newGame.player1, "player2": newGame.player2, "users": currentRoom, "roomID": room}, room=clientList[room][0])
+            emit('p1win', {"player1": newGame.player2, "player2": newGame.player1, "users": currentRoom, "roomID": room}, room=clientList[room][1])
         newGame.player1 = ""
         newGame.player2 = ""
+
+# Initialize function somewhere here
+@socketio.on('initialize')
+def initialize(data):
+    room = data['room'] # Room ID Number
+    users = rooms[room] # List of users in the room
+    emit('initialize', {"top": users[0], "bottom": users[1], "roomID": room}, room=clientList[room][0])
+    emit('initialize', {"top": users[1], "bottom": users[0], "roomID": room}, room=clientList[room][1])
+
+@socketio.on('reInitialize')
+def reInitialize(data):
+    room = data['room'] # Room ID Number
+    users = rooms[room] # List of users in the room
+    emit('reinitialize', {"top": users[0], "bottom": users[1], "roomID": room}, room=clientList[room][0])
+    emit('reinitialize', {"top": users[1], "bottom": users[0], "roomID": room}, room=clientList[room][1])
+
 
 
 
@@ -86,8 +118,6 @@ def handle_battle1(data):
 def handle_battle2(data):
     username = data['user']
     newGame.player2 = data['data']
-    print(newGame.player1)
-    print(newGame.player2)
     if newGame.player1 and newGame.player2:
         result = rps.rps(newGame.player1, newGame.player2)
         for room in rooms:
@@ -104,14 +134,7 @@ def handle_battle2(data):
         newGame.player1 = ""
         newGame.player2 = ""
 
-
-@socketio.on('checkLobbies')
-def checkLobbies():
-    print(rooms)
-
-
-
-    
+ 
 
 @app.route('/', methods=['GET'])
 def index():
@@ -151,6 +174,8 @@ def login():
                 return render_template('login.html')
         else:
             return render_template('login.html', error="")
+
+
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -231,9 +256,9 @@ def profile():
 
 @app.route('/match')
 def match():
-    if 'username' not in session:
-        return redirect(url_for('login'))
-    else:
+   # if 'username' not in session:
+     #   return redirect(url_for('login'))
+   # else:
         return render_template('match.html')
 
 @app.route('/logout')

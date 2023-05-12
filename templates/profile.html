@@ -8,25 +8,41 @@
 
 <script type="text/javascript" src="../static/javascript/loginScript.js"></script>
 
-<div class="formHolder">
-<img src="{{avatar}}" alt="your current avatar"/>
-<div style="color:whitesmoke; padding: 10px; font-size: 1rem;">Display Name: {{display}}</div>
-<div style="color:whitesmoke; padding: 10px; font-size: 1rem;">Username: {{username}}</div>
-<br />
-<div style="color:whitesmoke; padding: 10px; font-size: 1rem;">Need a Change?</div>
-<form >
-<input type="text" id="display" class="input_box" placeholder="New Display Name"/>
-<br />
-<input type="password" id="password" class="input_box" placeholder="New Password"/>
-<br />
-<input type="password" class="confirm_pass" placeholder="Confirm New Password"/>
-<div>{{ error }}</div>
-<input type="submit" class="submit" onclick="edit()"/>
-</form>
-<a class="register_link" href="{{url_for('logout')}}" >Logout</a>
-<br />
-<a class="register_link" href="{{url_for('index')}}" >Go Home</a>
+<div class="container">
+  <div class="container behind-screen">
+    <div class="container screen">
+      <p> Hey {{display}}!</p>
+    </div>
+  </div>
 </div>
+<br/>
 
+<div class="formHolder">
+    <div style="color:whitesmoke; padding: 10px; font-size: 1.2rem; font-weight: 700;" class="extra-text">Here's Your Info...</div>
+    <div style="color:whitesmoke; font-weight: 500" class="extra-text">Display Name: {{display}}</div>
+    <div style="color:whitesmoke; font-weight: 500" class="extra-text">Username: {{username}}</div>
+
+    <br/>
+    <br/>
+
+    <div style="color:whitesmoke; padding: 10px; font-size: 1.2rem; font-weight: 700;" class="extra-text">Need a Change?</div>
+    <form >
+        <input type="text" id="display" class="input_box" placeholder="New Display Name"/>
+        <br />
+        <input type="password" id="password" class="input_box" placeholder="New Password"/>
+        <br />
+        <input type="password" class="confirm_pass" placeholder="Confirm New Password"/>
+        <div>{{ error }}</div>
+        <input type="submit" class="submit" onclick="edit()"/>
+    </form>
+
+    <br/>
+    <br/>
+
+    <a class="register_link" href="{{url_for('logout')}}" >Logout</a>
+    <br />
+    <a class="register_link" href="{{url_for('index')}}" >Go Home</a>
+
+</div>
 
 </html>

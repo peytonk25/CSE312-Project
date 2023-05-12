@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+    <title>Leaderboard</title>
+</head>
+<script type="text/javascript" src="../static/javascript/scripts.js"></script>
+
+<div class="container">
+  <div class="container behind-screen">
+    <div class="container screen">
+      <p>Super Cool Players...</p>
+    </div>
+  </div>
+</div>
+
+<br/>
+
+<div class="leaderboard_container">
+    {{player_wins_loop}}
+    {{end_player_wins_loop}}
+</div>
+
+<br/>
+
+<div class="formHolder">
+    <a class="register_link" href="{{url_for('index')}}" >Go Home</a>
+</div>
+
+</html>

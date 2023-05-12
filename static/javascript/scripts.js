@@ -61,8 +61,15 @@ function joinRoom() {
     battleSpace.style.display = "block"
 }
 
-
-
+function toMatch() {
+    location.href = 'match';
+}
+function toProfile() {
+    location.href = 'profile';
+}
+function toLeaderboard() {
+    location.href = 'leaderboard';
+}
 
 function rock1() {
     socket.emit('battle', {data: "rock", user: "User"});

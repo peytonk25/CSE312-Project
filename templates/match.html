@@ -9,13 +9,23 @@
     <script type="text/javascript" charset="utf-8" src="static/javascript/scripts.js"></script>
 </script>
 </head>
-<h1 id="matchHeader" style="text-align: center;">Lobby Menu</h1>
+<div class="container">
+  <div class="container behind-screen">
+    <div class="container screen">
+      <p>Lobby Menu</p>
+    </div>
+  </div>
+</div>
+<br/>
+<br/>
 <button onclick="createRoom()">Click me to create a lobby</button>
 <br>
+<br />
+<br />
 
 
 <form name="joinForm" onsubmit="joinRoom(); return false">
-    <label for="idBox">Or search for a room here</label><br>
+    <label for="idBox" style="color:whitesmoke; font-weight: 500" class="extra-text">Or search for a room here</label><br>
     <input type="text" id="idBox" name="idBox">
     <input type="submit" value="Submit">
 </form> <br>

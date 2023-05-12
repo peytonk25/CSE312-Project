@@ -1,8 +1,8 @@
 function sendRegister() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const display = document.getElementById("display").value;
-    const c_pass = document.getElementById("c_pass").value;
+    const username = document.getElementById("username").value.toUpperCase();
+    const password = document.getElementById("password").value.toUpperCase();
+    const display = document.getElementById("display").value.toUpperCase();
+    const c_pass = document.getElementById("c_pass").value.toUpperCase();
     var data = new FormData();
     data.append('username', username);
     data.append('password', password);
@@ -14,8 +14,8 @@ function sendRegister() {
 }
 
 function sendLogin() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value.toUpperCase();
+    const password = document.getElementById("password").value.toUpperCase();
     var data = new FormData();
     data.append('username', username);
     data.append('password', password);

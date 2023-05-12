@@ -163,5 +163,13 @@ function scissors() {
     socket.emit('battle', {data: "scissors", user: document.getElementById("player1Name").innerHTML, roomID: room});
 }
 
-
+function toMatch() {
+    location.href = 'match';
+}
+function toProfile() {
+    location.href = 'profile';
+}
+function toLeaderboard() {
+    location.href = 'leaderboard';
+}
 

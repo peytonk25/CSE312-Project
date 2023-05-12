@@ -171,7 +171,7 @@ a.matchLink:hover {
     font-size: 35px;
     position: relative;
     display: flex;
-    animation: move 2s infinite linear;
+    animation: move 5s infinite linear;
     margin: auto;
     top: 2px;
     color: whitesmoke;

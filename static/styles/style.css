@@ -42,6 +42,7 @@ html {
     padding: 10px;
     font-family: "Ghoul";
     cursor: pointer;
+    text-transform: uppercase;
 }
 .input_box {
     background: black;
@@ -170,7 +171,7 @@ a.matchLink:hover {
     font-size: 35px;
     position: relative;
     display: flex;
-    animation: move 5s infinite linear;
+    animation: move 2s infinite linear;
     margin: auto;
     top: 2px;
     color: whitesmoke;

@@ -87,12 +87,13 @@ a.matchLink:hover {
     justify-content: center;
 }
 .battleOption {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     border: solid black 7px;
     margin: 10px;
     background-color: lightblue;
     padding: 10px;
+    cursor: pointer;
 }
 .vs {
     font-size: 70px;

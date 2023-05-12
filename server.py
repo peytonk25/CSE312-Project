@@ -240,12 +240,7 @@ def profile():
                         new_hash = bcrypt.hashpw(new_pass.encode('utf-8'), i['salt'])
                         for i in database.users_coll.find({'username': str(username)}):
                             database.users_coll.update_one({"_id": i['_id']},{"$set":{"password": new_hash}})
-                    else:
-                        error = 'Passwords Do Not Match'
-                        return render_template('profile.html', username=username, display=display, error=error)
-                else:
-                    error = 'Please Confirm New Password'
-                    return render_template('profile.html', username=username, display=display, error=error)
+
             if 'display' in data:
                 new_display = data['display']
                 for i in database.users_coll.find({'username': str(username)}):

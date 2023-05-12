@@ -151,13 +151,7 @@ def login():
         data = request.form.to_dict()
         if request.method == "POST" and 'username' in data and 'password' in data:
             username = data['username']
-            username = username.replace("&", '&amp;')
-            username = username.replace("<", '&lt;')
-            username = username.replace(">", '&gt;')
             password = data['password']
-            password = password.replace("&", '&amp;')
-            password = password.replace("<", '&lt;')
-            password = password.replace(">", '&gt;')
             check = False
             for i in database.users_coll.find({'username': str(username)}):
                 check = True
@@ -186,9 +180,6 @@ def register():
         if request.method == "POST" and 'username' in data and 'password' in data and 'display' in data and 'c_pass' in data:
             
             username = data['username']
-            username = username.replace("&", '&amp;')
-            username = username.replace("<", '&lt;')
-            username = username.replace(">", '&gt;')
             check = False
             for i in database.users_coll.find({'username': str(username)}):
                 check = True
@@ -197,12 +188,6 @@ def register():
             else:
                 password = data['password']
                 c_pass = data['c_pass']
-                password = password.replace("&", '&amp;')
-                password = password.replace("<", '&lt;')
-                password = password.replace(">", '&gt;')
-                c_pass = c_pass.replace("&", '&amp;')
-                c_pass = c_pass.replace("<", '&lt;')
-                c_pass = c_pass.replace(">", '&gt;')
                 if c_pass != password:
                     return render_template('register.html', error="Invalid Password")
                 else:
@@ -240,12 +225,7 @@ def profile():
                         new_hash = bcrypt.hashpw(new_pass.encode('utf-8'), i['salt'])
                         for i in database.users_coll.find({'username': str(username)}):
                             database.users_coll.update_one({"_id": i['_id']},{"$set":{"password": new_hash}})
-                    else:
-                        error = 'Passwords Do Not Match'
-                        return render_template('profile.html', username=username, display=display, error=error)
-                else:
-                    error = 'Please Confirm New Password'
-                    return render_template('profile.html', username=username, display=display, error=error)
+
             if 'display' in data:
                 new_display = data['display']
                 for i in database.users_coll.find({'username': str(username)}):

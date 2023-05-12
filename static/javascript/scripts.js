@@ -34,7 +34,6 @@ socket.on('initialize', function(data) {
 
 
 socket.on('reinitialize', function(data) {
-    console.log("Why isn't this working?")
     var topName = data["top"]
     var bottomName = data["bottom"]
     document.getElementById("player1Name").innerHTML = topName
@@ -94,9 +93,10 @@ socket.on('tie', function() {
 
 function leaveRoom() {
     var ogUser = document.getElementById('player1Name').innerHTML
-    var room = document.getElementById('matchHeader').innerHTML.split("-")[1]
-    socket.emit('leaveRoom', {roomID: room, user: ogUser})
-    document.getElementById('matchHeader').innerHTML = "Lobby Menu"
+    console.log(ogUser)
+    var room = document.getElementById('lobbyBanner').innerHTML.split("-")[1];
+    socket.emit('leaveRoom', {roomID: room, user: ogUser});
+    document.getElementById('lobbyBanner').innerHTML = "Lobby Menu"
     var battleSpace1 = document.getElementById('optionRow');
     var battleSpace2 = document.getElementById('optionRow2');
     battleSpace1.style.display = "none"
@@ -111,7 +111,7 @@ function createRoom() {
     var room = Math.floor(Math.random() * (999 - 100 + 1) + 100);   /* Insert user using cookie? */
     var p1 = document.getElementById("player1Name");
     p1.innerHTML = prompt("Please enter a display name");
-    document.getElementById('matchHeader').innerHTML = "Room - " + String(room) + " - Match In Progress";
+    document.getElementById('lobbyBanner').innerHTML = "Room - " + String(room) + " - Match In Progress";
     var battleSpace = document.getElementById('optionRow');
     battleSpace.style.display = "flex";
     document.getElementById("optionRow2").style.display = "flex";
@@ -128,7 +128,7 @@ function joinRoom() {
 }
 
 socket.on('joinSuccess', function(data) {
-    document.getElementById('matchHeader').innerHTML = "Room - " + data["room"] + " - Match In Progress";
+    document.getElementById('lobbyBanner').innerHTML = "Room - " + data["room"] + " - Match In Progress";
     var p1 = document.getElementById("player1Name");
     p1.innerHTML = data["user"];
     var p2 = document.getElementById("player2Name");
@@ -145,20 +145,19 @@ socket.on('joinSuccess', function(data) {
 
 
 function rock() {
-    var room = document.getElementById('matchHeader').innerHTML.split("-")[1]
+    var room = document.getElementById('lobbyBanner').innerHTML.split("-")[1]
     console.log(room)
-
     socket.emit('battle', {data: "rock", user: document.getElementById("player1Name").innerHTML, roomID: room});
 }
 
 function paper() {
-    var room = document.getElementById('matchHeader').innerHTML.split("-")[1]
+    var room = document.getElementById('lobbyBanner').innerHTML.split("-")[1]
     console.log(room)
     socket.emit('battle', {data: "paper", user: document.getElementById("player1Name").innerHTML, roomID: room});
 }
 
 function scissors() {
-    var room = document.getElementById('matchHeader').innerHTML.split("-")[1]
+    var room = document.getElementById('lobbyBanner').innerHTML.split("-")[1]
     console.log(room)
     socket.emit('battle', {data: "scissors", user: document.getElementById("player1Name").innerHTML, roomID: room});
 }

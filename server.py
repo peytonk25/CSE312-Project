@@ -118,7 +118,7 @@ def index():
     if 'username' not in session:
         return redirect(url_for('login'))
     else:
-        return render_template('index.html')
+        return render_template('homepage.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -243,6 +243,29 @@ def logout():
     else:
         session.pop('username')
         return redirect(url_for('login'))
+    
+@app.route('/leaderboard')
+def leaderboard():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    else:
+        x = database.users_coll.find({})
+        entry = ""
+        for i in x:
+            readfromcopy = open("./templates/copyleaderboard.html", "r")
+            read = readfromcopy.read()
+            start, end = "{{player_wins_loop}}", "{{end_player_wins_loop}}"
+            begin, finish = read.find(start), read.find(end)
+            loop = read[begin:finish + len(end)]
+            entry += '<div class ="leaderboard_rows"> <p>' + i["display"] + '</p> </div>'
+            read = read.replace(loop, entry)
+            readfromcopy.close()
+
+            html = open("./templates/leaderboard.html", "w")
+            html.write(read)
+            html.close()
+
+        return render_template('leaderboard.html')
 
 
 if __name__ == '__main__':

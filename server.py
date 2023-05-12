@@ -35,29 +35,29 @@ def handle_ping(data):
     print(data['data'])
 
 
-
-@socketio.on('createRoom')
+@socketio.on('createLobby')
 def makeLobby(data):
     roomID = data['roomID']
-    username = data['user']
+    username = session["username"]
     room = roomID
     join_room(room)
     rooms[roomID] = [username]
     clientList[roomID] = [request.sid]
     print(clientList)
-    print("User has joined room "+ str(room))
+    print(username+" has joined room "+ str(room))
+    emit('createRoom', {"user": username, "room": roomID})
 
 
 @socketio.on('joinRoom')
 def joinLobby(data):
     roomID = int(data['roomID'])
-    user = data['user']
+    user = session["username"]
     if int(roomID) in rooms:
         if len(rooms[roomID]) < 2:
             join_room(roomID)
             rooms[roomID].append(user)
             clientList[roomID].append(request.sid)
-            print("User2 has joined room " + str(roomID))
+            print(user+" has joined room " + str(roomID))
             emit('joinSuccess', {"user": user, "room": roomID})
         elif len(rooms[roomID]) == 2:
             print("Room is full.")
@@ -252,13 +252,14 @@ def profile():
                     database.users_coll.update_one({"_id": i['_id']},{"$set":{"display": str(new_display)}})
 
         error = ""
+        print(session["username"])
         return render_template('profile.html', username=username, display=display, error=error)
 
 @app.route('/match')
 def match():
-   # if 'username' not in session:
-     #   return redirect(url_for('login'))
-   # else:
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    else:
         return render_template('match.html')
 
 @app.route('/logout')

@@ -110,21 +110,22 @@ function leaveRoom() {
 function createRoom() {
     var room = Math.floor(Math.random() * (999 - 100 + 1) + 100);   /* Insert user using cookie? */
     var p1 = document.getElementById("player1Name");
-    p1.innerHTML = prompt("Please enter a display name");
-    document.getElementById('lobbyBanner').innerHTML = "Room - " + String(room) + " - Match In Progress";
+    socket.emit('createLobby', {roomID: room});
+}
+
+socket.on('createRoom', function(data) {
+    document.getElementById('lobbyBanner').innerHTML = "Room - " + String(data["room"]) + " - Match In Progress";
     var battleSpace = document.getElementById('optionRow');
     battleSpace.style.display = "flex";
     document.getElementById("optionRow2").style.display = "flex";
-    let username = p1.innerHTML
-    socket.emit('createRoom', {user: username, roomID: room}); 
-}
+    document.getElementById("player1Name").innerHTML = data["user"]
+});
 
 
 function joinRoom() {
     var idCheck = document.forms["joinForm"]["idBox"].value; /* Room number to check */
     console.log(idCheck);
-    let username = prompt("Please enter a display name")
-    socket.emit('joinRoom', {user: username, roomID: idCheck});
+    socket.emit('joinRoom', {roomID: idCheck});
 }
 
 socket.on('joinSuccess', function(data) {
@@ -132,7 +133,6 @@ socket.on('joinSuccess', function(data) {
     var p1 = document.getElementById("player1Name");
     p1.innerHTML = data["user"];
     var p2 = document.getElementById("player2Name");
-
 
     var battleSpace = document.getElementById('optionRow');
     battleSpace.style.display = "flex";

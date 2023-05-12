@@ -151,13 +151,7 @@ def login():
         data = request.form.to_dict()
         if request.method == "POST" and 'username' in data and 'password' in data:
             username = data['username']
-            username = username.replace("&", '&amp;')
-            username = username.replace("<", '&lt;')
-            username = username.replace(">", '&gt;')
             password = data['password']
-            password = password.replace("&", '&amp;')
-            password = password.replace("<", '&lt;')
-            password = password.replace(">", '&gt;')
             check = False
             for i in database.users_coll.find({'username': str(username)}):
                 check = True
@@ -186,9 +180,6 @@ def register():
         if request.method == "POST" and 'username' in data and 'password' in data and 'display' in data and 'c_pass' in data:
             
             username = data['username']
-            username = username.replace("&", '&amp;')
-            username = username.replace("<", '&lt;')
-            username = username.replace(">", '&gt;')
             check = False
             for i in database.users_coll.find({'username': str(username)}):
                 check = True
@@ -197,12 +188,6 @@ def register():
             else:
                 password = data['password']
                 c_pass = data['c_pass']
-                password = password.replace("&", '&amp;')
-                password = password.replace("<", '&lt;')
-                password = password.replace(">", '&gt;')
-                c_pass = c_pass.replace("&", '&amp;')
-                c_pass = c_pass.replace("<", '&lt;')
-                c_pass = c_pass.replace(">", '&gt;')
                 if c_pass != password:
                     return render_template('register.html', error="Invalid Password")
                 else:

@@ -91,8 +91,8 @@ def handle_battle1(data):
             emit('p2win', {"player1": newGame.player1, "player2": newGame.player2, "users": currentRoom, "roomID": room}, room=clientList[room][0])
             emit('p2win', {"player1": newGame.player2, "player2": newGame.player1, "users": currentRoom, "roomID": room}, room=clientList[room][1])
         else:
-            emit('p1win', {"player1": newGame.player1, "player2": newGame.player2, "users": currentRoom, "roomID": room}, room=clientList[room][0])
-            emit('p1win', {"player1": newGame.player2, "player2": newGame.player1, "users": currentRoom, "roomID": room}, room=clientList[room][1])
+            emit('tie', {"player1": newGame.player1, "player2": newGame.player2, "users": currentRoom, "roomID": room}, room=clientList[room][0])
+            emit('tie', {"player1": newGame.player2, "player2": newGame.player1, "users": currentRoom, "roomID": room}, room=clientList[room][1])
         newGame.player1 = ""
         newGame.player2 = ""
 

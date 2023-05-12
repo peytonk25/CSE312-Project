@@ -251,9 +251,9 @@ def profile():
 
 @app.route('/match')
 def match():
-   # if 'username' not in session:
-     #   return redirect(url_for('login'))
-   # else:
+   if 'username' not in session:
+       return redirect(url_for('login'))
+   else:
         return render_template('match.html')
 
 @app.route('/logout')

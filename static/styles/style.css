@@ -2,16 +2,12 @@
   font-family: "Ghoul";
   src: url('https://get.fontspace.co/webfont/2OrOd/OTVkYjlhNzcyYjA3NDQ2ODg0NWYzYzU5ZmFmMjFmNWYub3Rm/rectaxel-bold.woff');
 }
-
 html {
     background: url("https://i.pinimg.com/originals/48/fb/f1/48fbf1ed8aeab2ca49b0e4438d8e7c5c.gif") no-repeat center center fixed;
     background-size: cover;
-    border: solid black 5px;
     font-family: "Ghoul";
     font-weight: 1000;
 }
-
-
 .logo {
     margin-left: auto;
     margin-right: auto;
@@ -21,12 +17,10 @@ html {
     padding-top: 5px;
     padding-bottom: 5px;
 }
-
 .login_title {
     font-size: 2rem;
     text-align: center;
 }
-
 .formHolder {
     display: flex;
     flex-direction: column;
@@ -34,7 +28,6 @@ html {
     justify-content: center;
     text-align: center;
 }
-
 .register_link {
     font-size: 1.2rem;
     color: whitesmoke;
@@ -42,7 +35,6 @@ html {
 .register_link:hover {
     color: #ff72a8;
 }
-
 .input_box, .confirm_pass {
     text-align: center;
     border-radius: 6px;
@@ -73,33 +65,26 @@ html {
 .submit:hover {
     background: #b4b4b4;
 }
-
-
 a.matchLink {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
-
     text-decoration: none;
     color: initial;
 }
-
 a.matchLink:hover {
     color: aqua;
 }
-
 #optionRow {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-
 #optionRow2 {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-
 .battleOption {
     width: 250px;
     height: 250px;
@@ -108,7 +93,6 @@ a.matchLink:hover {
     background-color: lightblue;
     padding: 10px;
 }
-
 .vs {
     font-size: 70px;
     font-weight: bold;
@@ -118,7 +102,6 @@ a.matchLink:hover {
     -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: black;
 }
-
 .title-banner {
     display: grid;
     align-items: center;
@@ -127,7 +110,6 @@ a.matchLink:hover {
     border: inset black 8px;
     /* box-shadow: 0 0 10px 10px white; */
 }
-
 .leftBannerText {
     color: white;
     -webkit-text-stroke-width: 3px;
@@ -138,7 +120,6 @@ a.matchLink:hover {
     left: 150px;
     text-align: right;
 }
-
 .rightBannerText {
     color: white;
     -webkit-text-stroke-width: 3px;
@@ -151,7 +132,6 @@ a.matchLink:hover {
     margin-right: 200px;
 }
 
- 
 .container {
     width: 20%;
     height: 60px;
@@ -164,7 +144,6 @@ a.matchLink:hover {
     border-radius: 5px;
     box-shadow: 0px 2px 1.5px 1.5px rgba(0,0,0,0.20);
 }
-  
 .container .behind-screen {
     background: black;
     width: 95%;
@@ -177,7 +156,6 @@ a.matchLink:hover {
     0 0 2.5rem #ED6BAA,
     inset 0 0 0.7rem #ED6BAA;
 }
-
 .container .screen {
   width: 95%;
   height: 95%;
@@ -187,7 +165,6 @@ a.matchLink:hover {
   box-shadow: inset 0px 5px 10px 2px rgba(0,0,0,0.4);
   text-align: center;
 }
-
 .container .screen p {
     font-family: 'Ghoul';
     font-size: 35px;
@@ -207,51 +184,154 @@ a.matchLink:hover {
     0 0 102px #cc314e,
     0 0 151px #cc314e;
 }
-
 @keyframes move {
     from {
-        left: 300px;
+        left: 350px;
     }
     to {
-        left: -300px;
+        left: -350px;
     }
 }
-
-
-.avatar-container {
-  width: 80%;
-  position: relative;
-  margin: 0 auto;
-  text-align: center;
+.icon_container {
+    display: flex;
+    flex-direction: row;
 }
-.individual-avatar {
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
-    border-radius: 50%;
-    display: inline-block;
-    text-align: center;
-    transition: background 0.2s, opacity 0.2s;
-    box-shadow:
-    0 0 0.5rem black,
-    0 0 0.5rem black,
-    0 0 1rem #f3a4ca,
-    0 0 1rem #f3a4ca,
-    0 0 1rem #f3a4ca;
+.profile, .leaderboard {
+    top: 1000px;
+    border-radius: 6px;
+    border: 2px solid rgba(255, 151, 236, 0.74);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 151, 236, 0.55);
+    transition: background-color 0.1s;
+    margin: 10px;
 }
-.individual-avatar:hover {
-    background: black;
+.profile:hover, .leaderboard:hover {
+    background: rgba(255, 111, 230, 0.7);
     cursor: pointer;
 }
-.individual-avatar:hover .atext {
-    opacity: 1;
+.profile {
+    left: 60px;
 }
-.a1 { background: white url("../images/pixel-hand.png") no-repeat center center; background-size: contain;}
-.a2 { background: white url("../images/pixel-rock.png") no-repeat center center; background-size: contain;}
-.a3 { background: white url("../images/pixel-scissors.png") no-repeat center center; background-size: contain;}
-.atext {
-    position: relative;
+.leaderboard {
+    left: 20px;
+}
+.extra-text {
+    text-shadow:
+    0 0 5px #ED6BAA,
+    0 0 5px #ED6BAA,
+    0 0 5px #ED6BAA,
+    0 0 5px #cc314e,
+    0 0 5px #cc314e,
+    0 0 5px #cc314e,
+    0 0 5px #cc314e,
+    0 0 5px #cc314e;
+    padding: 3px;
+}
+.leaderboard_container {
+    display: flex;
+    width: 70%;
+    border-radius: 6px;
+    border: 2px solid rgba(255, 151, 236, 0.74);
+    background: rgba(255, 151, 236, 0.55);
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    margin: 0 auto;
+    flex-direction: column;
+}
+.leaderboard_rows {
+    text-align: center;
+    border-radius: 10px;
+    background-color: black;
+    width: 55%;
+    margin: 5px;
+    box-shadow: 0px 2px 1.5px 1.5px rgba(0,0,0,0.20);
+    border: 2px solid rgba(255, 151, 236, 0.74);
+}
+.leaderboard_rows p {
     color: whitesmoke;
-    top: 40px;
-    opacity: 0;
+    font-size: 25px;
 }
+@keyframes appear
+{
+  0% {
+      transform: scale(0);
+  }
+  100% {
+      transform: scale(0);
+  }
+}
+.rps_center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.rps_container {
+    width: 120px;
+    padding: 10px;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+}
+.smaller_img {
+    width: 100px;
+    height: 100px;
+    padding-top: 40px;
+}
+.rps_text {
+    display: block;
+    text-shadow:
+    0 0 5px #ED6BAA,
+    0 0 5px #ED6BAA,
+    0 0 5px #ED6BAA,
+    0 0 5px #cc314e,
+    0 0 5px #cc314e,
+    0 0 5px #cc314e,
+    0 0 5px #cc314e,
+    0 0 5px #cc314e;
+    padding: 5px;
+    font-size: 30px;
+}
+
+
+/*.avatar-container {*/
+/*  width: 80%;*/
+/*  position: relative;*/
+/*  margin: 0 auto;*/
+/*  text-align: center;*/
+/*}*/
+/*.individual-avatar {*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    margin-right: 20px;*/
+/*    border-radius: 50%;*/
+/*    display: inline-block;*/
+/*    text-align: center;*/
+/*    transition: background 0.2s, opacity 0.2s;*/
+/*    box-shadow:*/
+/*    0 0 0.5rem black,*/
+/*    0 0 0.5rem black,*/
+/*    0 0 1rem #f3a4ca,*/
+/*    0 0 1rem #f3a4ca,*/
+/*    0 0 1rem #f3a4ca;*/
+/*}*/
+/*.individual-avatar:hover {*/
+/*    background: black;*/
+/*    cursor: pointer;*/
+/*}*/
+/*.individual-avatar:hover .atext {*/
+/*    opacity: 1;*/
+/*}*/
+/*.a1 { background: white url("../images/pixel-hand.png") no-repeat center center; background-size: contain;}*/
+/*.a2 { background: white url("../images/pixel-rock.png") no-repeat center center; background-size: contain;}*/
+/*.a3 { background: white url("../images/pixel-scissors.png") no-repeat center center; background-size: contain;}*/
+/*.atext {*/
+/*    position: relative;*/
+/*    color: whitesmoke;*/
+/*    top: 40px;*/
+/*    opacity: 0;*/
+/*}*/
